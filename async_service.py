@@ -47,7 +47,10 @@ class AsyncServer(threading.Thread):
         """
         task = asyncio.create_task(self.main())
 
+        # This is a simpler alternative if nothing is to be done on the loop
+        # self.stop_event.wait()
         while not self.stop_event.is_set():
+            # Do something from while to while :)
             await asyncio.sleep(1)
 
         task.cancel()  # Cancel the running task
